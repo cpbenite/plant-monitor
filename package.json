@@ -1,0 +1,22 @@
+{
+  "name": "plant-monitor",
+  "version": "1.0.0",
+  "description": "Building Plant Monitor System Web Server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cpbenite/plant-monitor.git"
+  },
+  "author": "Kevin Hau, Christian Benitiez, Anthony Orsborn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cpbenite/plant-monitor/issues"
+  },
+  "homepage": "https://github.com/cpbenite/plant-monitor#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
