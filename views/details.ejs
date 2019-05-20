@@ -1,0 +1,93 @@
+<% include ./partials/head.ejs %>
+
+<% include ./partials/header.ejs %>
+
+
+<a id="convert-times" onclick="convertTimes([<%= times %>])" hidden></a>
+
+<div class="my ui small two grey statistics">
+  <div class="statistic">
+    <div class="value">
+      <%= Math.min(...temperature) %> - <%= Math.max(...temperature) %> &degC
+    </div>
+    <div class="label">Avg Temperature</div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      <%= Math.min(...humidity) %> - <%= Math.max(...humidity) %> %
+    </div>
+    <div class="label">Avg Humidity</div>
+  </div>
+</div>
+<div class="my ui small two grey statistics">
+  <div class="statistic">
+    <div class="value">
+      <%= Math.min(...brightness) %> - <%= Math.max(...brightness) %> / 1023
+    </div>
+    <div class="label">Avg Brightness</div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      350 - 450 / 1023
+    </div>
+    <div class="label">Avg Moisture</div>
+  </div>
+</div>
+
+
+
+<div class="my ui segment">
+  <div class="ui tabular menu">
+    <a class="active item" id="first-chart" onclick="showLineChart(this, [425, 400, 415])">
+      Moisture
+    </a>
+    <a class="item" onclick="showLineChart(this, [<%= temperature %>])">
+      Temperature
+    </a>
+    <a class="item" onclick="showLineChart(this, [<%= humidity %>])">
+      Humidity
+    </a>
+    <a class="item" onclick="showLineChart(this, [<%= brightness %>])">
+      Brightness
+    </a>
+  </div>
+
+  <!-- CHART CANVAS -->
+  <canvas></canvas>
+</div>
+
+<div class="my centered ui grid">
+  <div class="my seven wide column">
+    <h3 class="table label bg-blue">History</h3>
+    <div class="table wrapper">
+      <table class="ui celled table">
+
+        <thead class="">
+          <th>Timestamp</th>
+          <th>Temperature</th>
+          <th>Humidity</th>
+          <th>Brightness</th>
+          <th>Moisture</th>
+        </thead>
+
+        <% data.forEach( function(reading, i) { %>
+
+        <tr>
+          <td class="date"> <%= times[i] %> </td>
+          <td> <%= reading.temperature %> </td>
+          <td> <%= reading.humidity %> </td>
+          <td> <%= reading.brightness %> </td>
+          <td> 450 </td>
+        </tr>
+
+        <% }) %>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript" src="/js/details.js"></script>
+
+<% include ./partials/foot %>

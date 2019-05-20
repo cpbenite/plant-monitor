@@ -1,0 +1,50 @@
+.ui.menu:first-child {
+  margin: 1em auto;
+}
+
+.jscolor {
+  text-align: center;
+}
+
+.my.centered {
+  text-align: center;
+}
+
+.my.column {
+  margin: auto;
+}
+
+.bg-blue {
+  background-color: #17363F !important;
+  color: white !important;
+}
+
+.table.label {
+  text-align: center;
+  height: 40px;
+  margin: 0 auto;
+  line-height: 40px;
+  border-radius: 5px;
+}
+
+table {
+  margin-top: 0 !important;
+}
+
+
+.table.wrapper {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+canvas {
+  width: 100%;
+}
+
+.my.grid, .my.statistics, .my.segment {
+    margin-top: 2rem !important;
+}
+
+.value {
+  padding-top: 2rem;
+}
