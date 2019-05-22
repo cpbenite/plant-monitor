@@ -4,7 +4,7 @@
 
 <script type="text/javascript" src="/js/jscolor.js"></script>
 
-<a id="stats-generator" hidden onclick="analyze([<%= stats.temperatureData %>], [<%= stats.humidityData %>], [<%= stats.onData %>])"></a>
+<a id="stats-generator" hidden onclick="analyze([<%= stats.temperatureData %>], [<%= stats.humidityData %>], [<%= stats.onData %>], [<%= stats.moistData %>])"></a>
 
 <!-- Color Form -->
 <!-- <form action="/set-color" method="post" class="ui form" id="color-form">
@@ -71,7 +71,7 @@
     </div>
     <div class="statistic">
       <div class="value">
-        400 / 1023
+        <%= stats.avgMoistness %> / 1023
       </div>
       <div class="label">Avg Moisture</div>
     </div>
@@ -120,7 +120,7 @@
     </div>
     <div class="four wide field">
       <label>Moist</label>
-      <input type="number" name="setting[moistureThreshold]" value="400">
+      <input type="number" name="setting[moistThreshold]" value="<%= settings.moistThreshold %>">
     </div>
 
     <div class="two wide field">

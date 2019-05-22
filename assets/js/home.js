@@ -1,30 +1,31 @@
 setActivePage('nav_home');
 document.getElementById("stats-generator").click();
 
-if (document.querySelector('.jscolor').value == "000000") {
-  document.getElementById("off-button").classList.add("disabled");
-  document.getElementById("set-default-button").classList.add("disabled");
-}
-else {
-  document.getElementById("off-button").classList.remove("disabled");
-  document.getElementById("set-default-button").classList.remove("disabled");
-}
 
-function submit(setDefault=false, useDefault=false, turnOff=false) {
-  // If any checkboxes are checked, display it on buttons
-  if (setDefault == true) {
-    document.getElementById("set-as-default").checked = true;
-  }
-  if (useDefault == true) {
-    document.getElementById("change-to-default").checked = true;
-  }
-  if (turnOff == true) {
-    document.getElementById("turn-off").checked = true;
-  }
-
-  // Submit color form
-  document.getElementById("color-form").submit();
-}
+// if (document.querySelector('.jscolor').value == "000000") {
+//   document.getElementById("off-button").classList.add("disabled");
+//   document.getElementById("set-default-button").classList.add("disabled");
+// }
+// else {
+//   document.getElementById("off-button").classList.remove("disabled");
+//   document.getElementById("set-default-button").classList.remove("disabled");
+// }
+//
+// function submit(setDefault=false, useDefault=false, turnOff=false) {
+//   // If any checkboxes are checked, display it on buttons
+//   if (setDefault == true) {
+//     document.getElementById("set-as-default").checked = true;
+//   }
+//   if (useDefault == true) {
+//     document.getElementById("change-to-default").checked = true;
+//   }
+//   if (turnOff == true) {
+//     document.getElementById("turn-off").checked = true;
+//   }
+//
+//   // Submit color form
+//   document.getElementById("color-form").submit();
+// }
 
 
 function renderChart(ctx, data) {
@@ -39,7 +40,7 @@ function renderChart(ctx, data) {
   });
 }
 
-function analyze(temperatureData, humidityData, onData) {
+function analyze(temperatureData, humidityData, onData, moistureData) {
   console.log("Inside Analyze function");
   var temperatureRenderData = {
     datasets: [{
@@ -49,6 +50,8 @@ function analyze(temperatureData, humidityData, onData) {
 
     labels: ['Hot', 'Comfortable', 'Cold']
   };
+
+  console.log(temperatureData);
 
   var humidityRenderData = {
     datasets: [{
@@ -68,7 +71,7 @@ function analyze(temperatureData, humidityData, onData) {
     labels: ['On','Off']
   };
 
-  let moistureData = [0.5, 0.5];
+  console.log(moistureData);
 
   var moistureRenderData = {
     datasets: [{
@@ -78,22 +81,6 @@ function analyze(temperatureData, humidityData, onData) {
 
     labels: ['Dry','Moist']
   };
-
-  for (var item in temperatureData) {
-    console.log("temperatureData = " + item);
-  }
-
-  for (var item in humidityData) {
-    console.log("humidityData = " + item);
-  }
-
-  for (var item in onData) {
-    console.log("onData = " + item);
-  }
-
-   console.log("Temp: " + Array.isArray(temperatureData));
-   console.log("Hum: " + humidityData);
-   console.log("On: " + onData);
 
   renderChart(document.getElementById("temperature-chart"), temperatureRenderData);
   renderChart(document.getElementById("humidity-chart"), humidityRenderData);

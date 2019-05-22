@@ -11,6 +11,9 @@ var statsSchema = new mongoose.Schema({
   avgBrightness: {
     type: Number
   },
+  avgMoistness: {
+    type: Number,
+  },
   timeInHot: {
     type: Number
   },
@@ -21,6 +24,9 @@ var statsSchema = new mongoose.Schema({
     type: Number
   },
   timeInHumid: {
+    type: Number
+  },
+  timeInMoist: {
     type: Number
   },
   timeOn: {

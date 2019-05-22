@@ -28,7 +28,7 @@
   </div>
   <div class="statistic">
     <div class="value">
-      350 - 450 / 1023
+      <%= Math.min(...moistness) %> - <%= Math.max(...moistness) %>
     </div>
     <div class="label">Avg Moisture</div>
   </div>
@@ -38,7 +38,7 @@
 
 <div class="my ui segment">
   <div class="ui tabular menu">
-    <a class="active item" id="first-chart" onclick="showLineChart(this, [425, 400, 415])">
+    <a class="active item" id="first-chart" onclick="showLineChart(this, [<%= moistness %>])">
       Moisture
     </a>
     <a class="item" onclick="showLineChart(this, [<%= temperature %>])">
@@ -77,7 +77,7 @@
           <td> <%= reading.temperature %> </td>
           <td> <%= reading.humidity %> </td>
           <td> <%= reading.brightness %> </td>
-          <td> 450 </td>
+          <td> <%= reading.moistness %> </td>
         </tr>
 
         <% }) %>

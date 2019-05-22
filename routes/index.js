@@ -18,27 +18,24 @@ router.get('/', (req, res) => {
     .then( function(statResult) {
 
       console.log("Stat result: " + statResult);
-      //statResult.timeInTotal = 100;
+      var timeInMoist = statResult.timeInMoist / statResult.timeInTotal;
       var timeInHot = statResult.timeInHot / statResult.timeInTotal;
       var timeInCold = statResult.timeInCold / statResult.timeInTotal;
       var timeInHumid = statResult.timeInHumid / statResult.timeInTotal;
       var timeInDry = statResult.timeInDry / statResult.timeInTotal;
       var timeOn = statResult.timeOn / statResult.timeInTotal;
 
-
-      console.log("Time in Hot: " + timeInHot, statResult.timeInHot, statResult.timeInTotal);
-
       var stat = {
         avgTemperature: statResult.avgTemperature.toFixed(2),
         avgHumidity: statResult.avgHumidity.toFixed(2),
-        avgBrightness: statResult.avgBrightness,
+        avgBrightness: statResult.avgBrightness.toFixed(2),
+        avgMoistness: statResult.avgMoistness.toFixed(2),
         temperatureData: [timeInHot, 1-timeInHot-timeInCold, timeInCold],
         humidityData: [timeInHumid, 1-timeInHumid-timeInDry, timeInDry],
-        onData: [timeOn, 1-timeOn]
+        onData: [timeOn, 1-timeOn],
+        moistData: [timeInMoist, 1-timeInMoist]
       };
 
-      console.log("Temp. data: " + stat.temperatureData[0]+" "+stat.temperatureData[1]);
-      console.log("Settings: " + setting);
 
       res.render('home', {settings: setting, stats: stat});
     })
@@ -57,6 +54,7 @@ router.get('/details', (req, res) => {
       var temperatures = [];
       var humidities = [];
       var brightnesses = [];
+      var moistnesses = [];
 
       console.log("Data: " + data);
       data.forEach( function (reading) {
@@ -64,12 +62,14 @@ router.get('/details', (req, res) => {
         temperatures.push(reading.temperature);
         humidities.push(reading.humidity);
         brightnesses.push(reading.brightness);
+        moistnesses.push(reading.moistness);
       });
 
       res.render('details', { data: data,
                               temperature: temperatures.reverse(),
                               humidity: humidities.reverse(),
                               brightness: brightnesses.reverse(),
+                              moistness: moistnesses.reverse(),
                               times: times.reverse()
       });
     })
@@ -135,24 +135,25 @@ router.post("/configure", (req, res) => {
     });
 });
 //
-// // Grab Data, update listing, refresh details
-// router.get('/seed/:temp/:hum/:bright', (req, res) => {
-//   // Store data from URL into a dictionary
-//   var seed = {
-//     temperature: req.params.temp,
-//     humidity: req.params.hum,
-//     brightness: req.params.bright
-//   }
-//
-//   // Create a database entry for dictionary
-//   db.Data.create(seed)
-//     .then(function(newData){
-//       res.redirect('/details');
-//     })
-//     .catch(function(err){
-//       res.send(err);
-//     })
-// })
+// Grab Data, update listing, refresh details
+router.get('/seed/:temp/:hum/:bright/:moist', (req, res) => {
+  // Store data from URL into a dictionary
+  var seed = {
+    temperature: req.params.temp,
+    humidity: req.params.hum,
+    brightness: req.params.bright,
+    moistness: req.params.moist
+  }
+
+  // Create a database entry for dictionary
+  db.Data.create(seed)
+    .then(function(newData){
+      res.redirect('/details');
+    })
+    .catch(function(err){
+      res.send(err);
+    })
+})
 //
 // // Seed Route
 // router.get('/seedStats', (req, res) => {

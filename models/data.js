@@ -17,6 +17,9 @@ var dataSchema = new mongoose.Schema({
   brightness: {
     type: Number,
     required: 'Must record'
+  },
+  moistness: {
+    type: Number
   }
 });
 
