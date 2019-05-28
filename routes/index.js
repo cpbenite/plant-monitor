@@ -2,10 +2,11 @@
 var express     = require('express'),
     db          = require('../models'),
     router      = express.Router();
+const { ensureAuthenticated } = require('../config/auth');
 
 
 // Home Route
-router.get('/', (req, res) => {
+router.get('/', ensureAuthenticated, (req, res) => {
 
   var setting;
 
@@ -46,7 +47,7 @@ router.get('/', (req, res) => {
 });
 
 // Details Route
-router.get('/details', (req, res) => {
+router.get('/details', ensureAuthenticated, (req, res) => {
   // Grab all data, limit to 24 readings, sort by most recent
   db.Data.find().limit(24).sort({timestamp: -1})
     .then( function(data){

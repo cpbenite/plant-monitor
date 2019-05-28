@@ -25,10 +25,12 @@ exports.resetStats = function (req, res) {
     'avgTemperature': 0,
     'avgHumidity': 0,
     'avgBrightness': 0,
+    'avgMoistness': 0,
     'timeInHot': 0,
     'timeInCold': 0,
     'timeInDry': 0,
     'timeInHumid': 0,
+    'timeInMoist': 0,
     'timeOn': 0,
     'timeTotal': 0
   };
