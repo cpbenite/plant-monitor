@@ -20,7 +20,7 @@ console.log(typeof(db));
 // Connect to MongoDB
 mongoose
   .connect(
-    process.env.DB_HOST,
+    db,
     { useNewUrlParser: true }
   )
   .then(() => console.log('MongoDB Connected'))

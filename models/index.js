@@ -4,9 +4,11 @@ var mongoose      = require('mongoose'),
 // Load dotenv into app
 //dotenv.load();
 
+const db = require('../config/keys').mongoURI;
+
 // Configure Mongoose
 mongoose.set('debug', true);
-mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true, useFindAndModify: false });
+mongoose.connect(db, { useNewUrlParser: true, useFindAndModify: false });
 
 // Debugging
 mongoose.promise = Promise;
