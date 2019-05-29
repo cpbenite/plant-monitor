@@ -19,7 +19,7 @@ console.log(typeof(db));
 // Connect to MongoDB
 mongoose
   .connect(
-    db,
+    'mongodb+srv://admin:admin@intro-to-iot-shws9.mongodb.net/test?retryWrites=true',
     { useNewUrlParser: true }
   )
   .then(() => console.log('MongoDB Connected'))
