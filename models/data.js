@@ -19,6 +19,13 @@ var dataSchema = new mongoose.Schema({
     required: 'Must record'
   },
   moistness: {
+    type: Number,
+    required: 'Must record'
+  },
+  v_load: {
+    type: Number
+  },
+  v_solar: {
     type: Number
   }
 });

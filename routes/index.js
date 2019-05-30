@@ -79,50 +79,6 @@ router.get('/details', ensureAuthenticated, (req, res) => {
     });
 });
 
-// Color Form Route
-router.post('/set-color', (req, res) => {
-
-  db.Settings.findOne({})
-    .then( function(result) {
-      // console.log("Result: " + result);
-      var settings = {
-        'lightColor': req.body.color || "000000",
-        'lightIsOn': true
-      }
-
-      // Check if any checkboxes were checked
-      if (req.body.options) {
-        // Set as Default is checked
-        if (req.body.options.setAsDefault) {
-          settings['defaultColor'] = req.body.color;
-        }
-
-        // CHange to Default is checked
-        else if (req.body.options.changeToDefault) {
-          // TO-DO: Retrieve default color from database
-          settings['lightColor'] = result['defaultColor'];
-        }
-
-        // Turn off or black color is inputted
-        else if (req.body.options.turnOff || req.body.color == '000000') {
-          settings['lightColor'] = '000000';
-          settings['lightIsOn'] = false;
-        }
-      }
-
-      // new == true prints out updated database
-      // upsert == true creates a document if it doesn't exist yet
-      return db.Settings.findOneAndUpdate({}, settings, {'new': true, upsert: true})
-    })
-    .then( function(edited) {
-      console.log(edited);
-      res.redirect('/');
-    })
-    .catch( function(err) {
-      res.send(err);
-    });
-});
-
 // Config Form Route
 // Grab Settings, update listing, refresh home
 router.post("/configure", (req, res) => {
@@ -135,7 +91,7 @@ router.post("/configure", (req, res) => {
       res.send(err);
     });
 });
-//
+
 // Grab Data, update listing, refresh details
 router.get('/seed/:temp/:hum/:bright/:moist', (req, res) => {
   // Store data from URL into a dictionary

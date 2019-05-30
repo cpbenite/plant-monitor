@@ -2,15 +2,6 @@ var mongoose      = require('mongoose');
 
 // Define Settings Schema
 var settingSchema = new mongoose.Schema({
-  defaultColor: {
-    type: String
-  },
-  lightColor: {
-    type: String
-  },
-  lightIsOn: {
-    type: Boolean
-  },
   hotThreshold: {
     type: Number
   },
