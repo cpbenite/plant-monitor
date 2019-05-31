@@ -1,0 +1,96 @@
+<% include ./partials/head %>
+
+<% include ./partials/header %>
+
+
+
+<% if (datas.moistness < settings.moistThreshold) { %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    You are low on water.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% } %>
+
+<% if (datas.moistness > settings.moistThreshold) { %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    Your plant is properly watered.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% } %>
+
+
+<% if (datas.humidity < settings.humidThreshold) { %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    Your plant is in low humidity.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% } %>
+
+<% if (datas.humidity > settings.humidThreshold) { %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    Your plant is in proper humidity
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% } %>
+
+
+<% if (datas.brightness < settings.darkThreshold) { %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    Your plant is in low sunlight.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% } %>
+
+<% if (datas.brightness > settings.darkThreshold) { %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    Your plant is properly lit.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% } %>
+
+
+<% if (settings.coldThreshold > datas.temperature) { %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    Your plant is in low temperature.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% } %>
+
+<% if (settings.hotThreshold < datas.temperature) { %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    Your plant is in high temperature.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% } %>
+
+<% if (settings.hotThreshold > datas.temperature && datas.temperature > settings.coldThreshold)  { %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    Your plant is in proper temperature.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% } %>
+
+
+
+
+
+
+<% include ./partials/foot %>

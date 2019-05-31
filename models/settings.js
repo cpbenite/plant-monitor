@@ -11,9 +11,6 @@ var settingSchema = new mongoose.Schema({
   humidThreshold: {
     type: Number
   },
-  dryThreshold: {
-    type: Number
-  },
   darkThreshold: {
     type: Number
   },

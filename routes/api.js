@@ -3,7 +3,8 @@ var express         = require('express'),
     db              = require('../models'),
     dataHelpers     = require('../helpers/data'),
     statHelpers     = require('../helpers/statistics'),
-    settingsHelpers = require('../helpers/settings');
+    settingsHelpers = require('../helpers/settings'),
+    waterHelpers    = require('../helpers/water');
 
 // Sensor readings
 // Get, Post, and Delelte request for each database model
@@ -13,21 +14,22 @@ router.route('/data')
   .post(dataHelpers.createData)
   .delete(dataHelpers.deleteData);
 
-
 router.route('/data/:id')
   .get(dataHelpers.getOneData)
   .post(dataHelpers.editData)
   .delete(dataHelpers.deleteOneData);
 
-
 router.route('/statistics')
   .get(statHelpers.getStats)
   .post(statHelpers.editStats)
   .delete(statHelpers.resetStats);
-//
-//
+
 router.route('/settings')
   .get(settingsHelpers.getSettings)
   .put(settingsHelpers.editSettings);
+
+router.route('/water')
+  .get(waterHelpers.getWater)
+  .put(waterHelpers.editWater);
 
 module.exports = router;

@@ -21,17 +21,37 @@
 
 </form> -->
 
-<form action="/" method="post" class="ui form" id="water-form">
-  <input type="checkbox" id="set-as-default" name="options[setAsDefault]" hidden>
-  <input type="checkbox" id="turn-off" name="options[turnOff]" hidden>
-
-  <div class="ui submit button" onclick="submit(false, true)">Turn On</div>
-  <div class="ui submit button" id="off-button" onclick="submit(false, false, true)">Turn Off</div>
+<form action="/water" method="post" class="ui form" id="water-form">
+  <div class="fields">
+    <div class="four wide field">
+      <label>How often would you like your plant watered every week?</label>
+      <input type="number" name="water[frequency]" value="<%= waters.frequency %>">
+    </div>
+    <div class="four wide field">
+      <label>How much would you like to water your plant (in oz.)?</label>
+      <input type="number" name="water[amount]" value="<%= waters.amount %>">
+    </div>
+    <div class="two wide field">
+      <br>
+      <input type="submit" class="ui submit button" name="water" value="Submit">
+    </div>
+  </div>
 </form>
+
+
 
 <!-- Dashboard -->
 <div class="ui raised padded segment">
   <h2 class="ui header">Analytics Dashboard</h2>
+
+  <div class="ui one small grey statistics">
+    <div class="statistic">
+      <div class="value">
+        <%= waters.last_watered.toISOString().substring(0, 10); %>
+      </div>
+      <div class="label">Last Watered</div>
+    </div>
+  </div>
 
   <div class="ui two small grey statistics">
     <div class="statistic">
@@ -109,10 +129,6 @@
     <div class="four wide field">
       <label>Humid (%)</label>
       <input type="number" name="setting[humidThreshold]" value="<%= settings.humidThreshold %>">
-    </div>
-    <div class="four wide field">
-      <label>Dry (%)</label>
-      <input type="number" name="setting[dryThreshold]" value="<%= settings.dryThreshold %>">
     </div>
     <div class="four wide field">
       <label>Dark</label>

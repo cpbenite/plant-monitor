@@ -9,11 +9,17 @@ const { ensureAuthenticated } = require('../config/auth');
 router.get('/', ensureAuthenticated, (req, res) => {
 
   var setting;
+  var water;
 
   db.Settings.findOne({})
     .then( function(result) {
       console.log("Result: " + result);
       setting = result;
+      return db.Water.findOne();
+    })
+    .then( function(waterResult) {
+      water = waterResult;
+      console.log("Water: " + water);
       return db.Stats.findOne();
     })
     .then( function(statResult) {
@@ -37,8 +43,7 @@ router.get('/', ensureAuthenticated, (req, res) => {
         moistData: [timeInMoist, 1-timeInMoist]
       };
 
-
-      res.render('home', {settings: setting, stats: stat});
+      res.render('home', {settings: setting, stats: stat, waters: water});
     })
     .catch( function(err) {
       // console.log("Error: " + err);
@@ -79,6 +84,29 @@ router.get('/details', ensureAuthenticated, (req, res) => {
     });
 });
 
+// Notification Route
+router.get('/notifications', ensureAuthenticated, (req, res) => {
+
+  var setting;
+  var data;
+
+  db.Settings.findOne({})
+    .then( function(result) {
+      console.log("Result: " + result);
+      setting = result;
+      return db.Data.findOne();
+    })
+    .then( function(dataResult) {
+      data = dataResult;
+
+      res.render('notifications', {settings: setting, datas: data});
+    })
+    .catch( function(err) {
+      // console.log("Error: " + err);
+      res.send(err);
+    })
+});
+
 // Config Form Route
 // Grab Settings, update listing, refresh home
 router.post("/configure", (req, res) => {
@@ -91,6 +119,18 @@ router.post("/configure", (req, res) => {
       res.send(err);
     });
 });
+
+router.post("/water", (req, res) => {
+  db.Water.findOneAndUpdate({}, req.body.water, {'new': true, upsert: true})
+    .then( function(edited){
+      console.log(edited);
+      res.redirect('/');
+    })
+    .catch( function(err) {
+      res.send(err);
+    });
+});
+
 
 // Grab Data, update listing, refresh details
 router.get('/seed/:temp/:hum/:bright/:moist', (req, res) => {
