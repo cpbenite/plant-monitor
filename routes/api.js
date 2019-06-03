@@ -30,6 +30,7 @@ router.route('/settings')
 
 router.route('/water')
   .get(waterHelpers.getWater)
-  .put(waterHelpers.editWater);
+  .post(waterHelpers.editWater)
+  .delete(waterHelpers.resetWater);
 
 module.exports = router;

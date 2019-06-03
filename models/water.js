@@ -13,6 +13,9 @@ var waterSchema = new mongoose.Schema({
   }
 });
 
+console.log("Date: " + typeof(Date.now()));
+console.log(Date.now());
+
 // Set schema as a mongoose model
 var Water = mongoose.model('Water', waterSchema);
 

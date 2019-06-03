@@ -19,3 +19,19 @@ exports.editWater = function(req, res) {
       res.send(err);
     });
 }
+
+exports.resetWater = function (req, res) {
+  var blank = {
+    'frequency': 1,
+    'amount': 1,
+    'last_watered': Date.now()
+  };
+
+  db.Water.findOneAndUpdate({}, blank, {'new': true, upsert: true})
+    .then( function(data) {
+      res.json(data);
+    })
+    .catch( function(err) {
+      res.send(err);
+    });
+}
