@@ -25,11 +25,11 @@
   <div class="fields">
     <div class="four wide field">
       <label>How often would you like your plant watered every week?</label>
-      <input type="number" name="water[frequency]" value="<%= waters.frequency %>">
+      <input type="number" name="water[frequency]" value="<%= waters.frequency %>" min="0" >
     </div>
     <div class="four wide field">
       <label>How much would you like to water your plant (in oz.)?</label>
-      <input type="number" name="water[amount]" value="<%= waters.amount %>">
+      <input type="number" min="0" name="water[amount]" value="<%= waters.amount %>">
     </div>
     <div class="two wide field">
       <br>
