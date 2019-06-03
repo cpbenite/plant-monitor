@@ -76,10 +76,10 @@ function analyze(temperatureData, humidityData, onData, moistureData) {
   var moistureRenderData = {
     datasets: [{
       data: moistureData,
-      backgroundColor: ['#d8be5a', '#5a9dd8']
+      backgroundColor: ['#5a9dd8', '#d8be5a']
     }],
 
-    labels: ['Dry','Moist']
+    labels: ['Moist','Dry']
   };
 
   renderChart(document.getElementById("temperature-chart"), temperatureRenderData);
